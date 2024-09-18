@@ -22,4 +22,10 @@ button{
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
+    transition: background 0.5s;
+}
+button:hover{
+    cursor: pointer;
+    background: #29caad;
+
 }
