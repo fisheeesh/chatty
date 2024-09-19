@@ -1,24 +1,26 @@
 <template>
-    <nav>
+    <nav v-if="user">
         <div>
-            <p>Hi there! display name</p>
-            <p class="email">Logged in as email</p>
+            <p>Hi there! {{ user.displayName }}</p>
+            <p class="email">Logged in as {{ user.email }}</p>
         </div>
         <button @click="signOut">LogOut</button>
     </nav>
 </template>
 
 <script>
+import getUser from '@/composables/getUser';
 import useSignOut from '@/composables/useSignOut';
+import { auth } from '@/firebase/config';
 import { ref } from 'vue';
-
 export default {
     setup() {
-        let { error, logOut } = useSignOut()
+        let { user } = getUser()
+        let { logOut } = useSignOut()
         let signOut = async () => {
             await logOut()
         }
-        return { signOut }
+        return { signOut, user }
     }
 }
 </script>

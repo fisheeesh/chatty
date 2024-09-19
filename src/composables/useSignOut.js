@@ -13,7 +13,7 @@ let logOut = async () => {
     }
 }
 let useSignOut = () => {
-    return { error, logOut }
+    return { logOut }
 }
 
 export default useSignOut
