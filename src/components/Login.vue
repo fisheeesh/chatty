@@ -8,11 +8,12 @@
         <div class="align">
             <button>LogIn</button>
         </div>
-
+        <p v-if="error" class="error">{{ error }}</p>
     </form>
 </template>
 
 <script>
+import useLogIn from '@/composables/useLogIn';
 import { ref } from 'vue';
 
 export default {
@@ -20,12 +21,15 @@ export default {
         let email = ref('')
         let password = ref('')
 
-        let logIn = () => {
-            console.log(displayName.value, email.value, password.value)
+        let { error, signIn } = useLogIn()
+
+        let logIn = async () => {
+            let response = await signIn(email.value, password.value)
+            if(response) console.log(response.user)
         }
 
 
-        return { email, password, logIn }
+        return { email, password, logIn, error }
     }
 }
 </script>

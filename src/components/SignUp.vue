@@ -20,7 +20,6 @@
 
 <script>
 import useSignUp from '@/composables/useSignUp';
-import { auth } from '@/firebase/config';
 import { ref } from 'vue';
 
 export default {
