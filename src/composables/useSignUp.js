@@ -8,9 +8,7 @@ let createAccount = async (email, password, displayName) => {
         let response = await auth.createUserWithEmailAndPassword(email, password);
         if (!response) throw new Error("Could not create an account");
 
-        response.user.updateProfile({
-            displayName,
-        });
+        response.user.updateProfile({ displayName });
         return response;
     } catch (err) {
         error.value = err.message;
