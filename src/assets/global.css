@@ -15,6 +15,7 @@ body{
     color: crimson;
     font-size: 0.6rem;
     font-weight: bold;
+    text-align: center;
 }
 button{
     text-decoration: none;
