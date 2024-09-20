@@ -19,7 +19,6 @@ export default {
         let { logOut } = useSignOut()
         let signOut = async () => {
             await logOut()
-            // router.push('/')
         }
         return { signOut, user }
     }
