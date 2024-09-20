@@ -10,6 +10,7 @@
 
 <script>
 import getUser from "@/composables/getUser";
+import useCollection from "@/composables/useCollection";
 import { timeStamp } from "@/firebase/config";
 import { ref } from "vue";
 
@@ -17,6 +18,7 @@ export default {
   setup() {
     let message = ref("");
     let { user } = getUser()
+    let { error, addDoc } = useCollection('messages')
 
     let handleSubmit = () =>{
         let chat = {
@@ -24,7 +26,8 @@ export default {
             userName : user.value.displayName,
             sent_at : timeStamp()
         }
-        console.log(chat)
+        // console.log(chat)
+        addDoc(chat)
         message.value = ''
     }
 
