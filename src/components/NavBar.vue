@@ -11,14 +11,15 @@
 <script>
 import getUser from '@/composables/getUser';
 import useSignOut from '@/composables/useSignOut';
-import { auth } from '@/firebase/config';
-import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 export default {
     setup() {
+        let router = useRouter()
         let { user } = getUser()
         let { logOut } = useSignOut()
         let signOut = async () => {
             await logOut()
+            // router.push('/')
         }
         return { signOut, user }
     }
