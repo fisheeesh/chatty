@@ -1,18 +1,35 @@
 <template>
     <div class="chat-window">
         <div class="messages">
-            <div class="single">
-                <span class="created-at">3mins ago</span>
-                <span class="name">Fisheeesh</span>
-                <span class="message">Real Gangster Shit</span>
+            <div class="single" v-for="message in messages" :key="message.id">
+                <span class="created-at">{{ message.sent_at }}</span>
+                <span class="name">{{ message.userName }}</span>
+                <span class="message">{{ message.message }}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {
+import { db } from '@/firebase/config';
+import { ref } from 'vue';
 
+export default {
+    setup(){
+        let messages = ref([])
+        db.collection('messages').orderBy('sent_at').onSnapshot(snap => {
+            let results = []
+            snap.docs.forEach(doc =>{
+                let document = {...doc.data(), id : doc.id}
+                // console.log(document)
+                results.push(document)
+            })
+            // console.log(results)
+            messages.value = results
+        })
+
+        return { messages }
+    }
 }
 </script>
 
