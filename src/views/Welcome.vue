@@ -1,5 +1,6 @@
 <template>
   <div class="welcome container">
+    <h1 class="brand-heading">ConvoMate</h1>
     <div v-if="showLogIn">
       <Login @enterChatRoom="enterChatRoom"></Login>
       <p>Not a member yet? <span @click="showLogIn = !showLogIn">Create an account?</span></p>
@@ -36,7 +37,14 @@ export default {
   text-align: center;
   padding: 20px 0;
 }
-
+.welcome .brand-heading {
+  margin-bottom: 20px;
+  font-weight: 900;
+  font-size: 2.5rem;
+  font-style: italic;
+  color: #5ae4ca;
+  font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .welcome form {
   max-width: 420px;
   /* background: red; */
