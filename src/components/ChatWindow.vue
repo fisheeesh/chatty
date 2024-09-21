@@ -22,6 +22,14 @@ export default {
 
         // auto scorll bar feature
         onUpdated(() =>{
+            /**
+             * the one which is called by ref are html elements
+             * !they are not only html also they are catched by js elements so they can be used as js object
+             * scrollTop is default and 0 so the scoll bar always stays at the top of the element 
+             * scorllHeight is the height of the element
+             * ?If we want to get auto scroll bar feature as soon as the data is updated then we can changed the default value of scorll in the updated hook
+             * ? so we set scollTop value to the height of the element which is scroll height then we can get the auto scroll bar
+             */
             msgBox.value.scrollTop = msgBox.value.scrollHeight
         })
         
