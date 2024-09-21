@@ -1,6 +1,6 @@
 <template>
     <div class="chat-window">
-        <div class="messages">
+        <div class="messages" ref="msgBox">
             <div class="single" v-for="message in formattedMessages" :key="message.id">
                 <span class="created-at">{{ message.sent_at }} ago</span>
                 <span class="name">{{ message.userName }}</span>
@@ -13,11 +13,17 @@
 <script>
 import { db } from '@/firebase/config';
 import { formatDistanceToNow } from 'date-fns';
-import { computed, ref } from 'vue';
+import { computed, onUpdated, ref } from 'vue';
 
 export default {
     setup() {
         let messages = ref([]) 
+        let msgBox = ref(null)
+
+        // auto scorll bar feature
+        onUpdated(() =>{
+            msgBox.value.scrollTop = msgBox.value.scrollHeight
+        })
         
         /**
          * When it comes to create a new data based on the original data, we use computed property
@@ -59,7 +65,7 @@ export default {
             messages.value = results
         })
 
-        return { messages, formattedMessages }
+        return { messages, formattedMessages, msgBox }
     }
 }
 </script>
