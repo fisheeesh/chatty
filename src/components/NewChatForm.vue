@@ -50,6 +50,6 @@ form textarea{
     border-radius: 20px;
     font-family: inherit;
     outline: none;
-    /* resize: none; */
+    resize: none;
 }
 </style>
