@@ -1,5 +1,5 @@
 <template>
-  <h1>Chatty</h1>
+  <h1 class="fw-bold text-primary">Chatty</h1>
 </template>
 
 <script setup>

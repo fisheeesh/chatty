@@ -1,0 +1,28 @@
+// Font
+$font-family-sans-serif: 'Nunito', sans-serif;
+
+// Colors
+$primary: #1A73E8;
+$secondary: #FF7F50;
+$dark: #333333; 
+$light: #F9F9F9;
+$white: #ffffff; 
+$danger: #FF5A5F;
+$success: #28C76F;
+
+// Spacers
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 6,
+  7: $spacer * 8,
+  8: $spacer * 12,
+) !default;
+
+// Import Bootstrap SCSS after custom styles to ensure overrides
+@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
