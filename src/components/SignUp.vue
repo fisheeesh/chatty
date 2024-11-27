@@ -1,5 +1,5 @@
 <template>
-  <h1>Hi</h1>
+  <h1 class="text-secondary">Chatty</h1>
 </template>
 
 <script setup>
