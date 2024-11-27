@@ -1,5 +1,5 @@
 <template>
-  <section class="login mt-6">
+  <section class="login mt-5">
     <div class="container">
       <div class="row">
         <div class="col-lg-4 offset-lg-4 d-flex flex-column">
@@ -18,7 +18,7 @@
               <input autocomplete="off" type="password" id="password" placeholder="chatty2024"
                 class="form-control form-control-lg">
               <div class="d-flex justify-content-end mt-2">
-                <span class="text-decoration-underline" style="cursor: pointer;">Forgot Password?</span>
+                <span class="text-decoration-underline forgot">Forgot Password?</span>
               </div>
             </div>
             <div class="text-center">

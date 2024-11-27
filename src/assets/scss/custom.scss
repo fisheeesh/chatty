@@ -4,6 +4,15 @@ input::placeholder {
     color: #aaa !important;
 }
 
+.forgot {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.forgot:hover {
+    color: var(--bs-primary);
+}
+
 .signUp {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -26,4 +35,20 @@ input::placeholder {
 .signUp:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
+}
+
+.line {
+    width: 120px;
+    height: 2px;
+    background-color: #ddd;
+}
+
+.google {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.google:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
