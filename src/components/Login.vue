@@ -13,10 +13,13 @@
               <input autocomplete="off" id="email" type="email" placeholder="name@chatty.com"
                 class="form-control form-control-lg">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 position-relative">
               <label for="password" class="form-label fw-bold">Password <span class="text-danger">*</span></label>
-              <input autocomplete="off" type="password" id="password" placeholder="chatty2024"
+              <input autocomplete="off" :type="isShow ? 'text' : 'password'" id="password" placeholder="chatty2024"
                 class="form-control form-control-lg">
+              <span @click="isShow = !isShow" class="material-symbols-outlined eye">
+                {{ isShow ? 'visibility' : 'visibility_off' }}
+              </span>
               <div class="d-flex justify-content-end mt-2">
                 <span class="text-decoration-underline forgot">Forgot Password?</span>
               </div>
@@ -32,6 +35,10 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
+
+let isShow = ref(false)
 </script>
 
 <style></style>

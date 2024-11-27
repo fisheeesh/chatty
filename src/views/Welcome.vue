@@ -13,7 +13,7 @@
       <div class="card shadow-sm border-0 google">
         <div class="card-body px-3">
           <img src="../assets//images/google.png" width="30" alt="" class="img-fluid">
-          <span class="ms-3">Continue with Google</span>
+          <span class="ms-3 fw-bold">Continue with Google</span>
         </div>
       </div>
     </div>

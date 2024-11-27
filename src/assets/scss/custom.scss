@@ -52,3 +52,21 @@ input::placeholder {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
+.eye{
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    right: 5px;
+    color: #aaa;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.eye-signup{
+    position: absolute;
+    cursor: pointer;
+    top: 70%;
+    right: 5px;
+    color: #aaa;
+    transform: translateX(-50%) translateY(-50%);
+}
