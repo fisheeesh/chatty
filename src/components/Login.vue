@@ -1,37 +1,10 @@
 <template>
-    <h2>LogIn</h2>
-    <form @submit.prevent="logIn">
-        <label>Email</label>
-        <input type="email" placeholder="name@gmail.com" v-model="email">
-        <label>Email</label>
-        <input type="password" placeholder="abc123" v-model="password">
-        <div class="align">
-            <button>LogIn</button>
-        </div>
-        <p v-if="error" class="error">{{ error }}</p>
-    </form>
+  <h1>Chatty</h1>
 </template>
 
-<script>
-import useLogIn from '@/composables/useLogIn';
-import { ref } from 'vue';
-
-export default {
-    setup(props, context) {
-        let email = ref('')
-        let password = ref('')
-
-        let { error, signIn } = useLogIn()
-
-        let logIn = async () => {
-            let response = await signIn(email.value, password.value)
-            if(response) context.emit('enterChatRoom')
-        }
-
-
-        return { email, password, logIn, error }
-    }
-}
+<script setup>
 </script>
 
-<style></style>
+<style>
+
+</style>
