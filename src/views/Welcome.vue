@@ -9,7 +9,7 @@
       <span class="or mx-3">or</span>
       <div class="line"></div>
     </div>
-    <div class="mt-3 d-inline-block d-flex justify-content-center align-items-center">
+    <div class="my-3 d-inline-block d-flex justify-content-center align-items-center">
       <div class="card shadow-sm border-0 google">
         <div class="card-body px-3">
           <img src="../assets//images/google.png" width="30" alt="" class="img-fluid">

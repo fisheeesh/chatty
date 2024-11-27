@@ -4,9 +4,9 @@
       <div class="row">
         <div class="col-lg-4 offset-lg-4 d-flex flex-column">
           <div class="image-container mb-4 text-center">
-            <img src="../assets/images/logo.png" width="250" alt="" class="img-fluid">
+            <img src="../assets/images/chatty.png" width="250" alt="" class="img-fluid">
           </div>
-          <h2 class="fw-bold text-primary text-center mb-5">LogIn</h2>
+          <h2 class="fw-bold text-primary text-center mb-3">Log<span class="text-secondary">In</span></h2>
           <form @submit.prevent="handleSubmit">
             <div class="mb-3">
               <label for="email" class="form-label fw-bold">Email <span class="text-danger">*</span></label>
