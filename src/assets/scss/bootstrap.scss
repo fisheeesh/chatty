@@ -36,31 +36,12 @@ select.form-select {
     box-shadow: 0 0 0 1px $light !important;
   }
 }
-
-// // Buttons
-// $button-radius: 50px;
-// $button-padding-x: 30px;
-// $button-padding-y: 10px;
-
-// $btn-border-radius: $button-radius;
-// $btn-border-radius-sm: $button-radius;
-// $btn-border-radius-lg: $button-radius;
-
-// $btn-padding-x: $button-padding-x;
-// $btn-padding-x-sm: $button-padding-x;
-// $btn-padding-x-lg: $button-padding-x;
-
-// $btn-padding-y: $button-padding-y;
-// $btn-padding-y-sm: $button-padding-y;
-// $btn-padding-y-lg: $button-padding-y;
-
 // Input
 $input-radius: 0px;
-// $input-btn-padding-y: 1rem;
-// $input-btn-padding-x: 1rem;
 $input-border-radius: $input-radius;
 $input-border-radius-sm: $input-radius;
 $input-border-radius-lg: $input-radius;
+
 
 // Import Bootstrap SCSS after custom styles to ensure overrides
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';

@@ -32,8 +32,13 @@
               <div class="invalid-feedback">Password is required</div>
             </div>
             <div class="text-center">
-              <p class="fs-6 text-danger">{{ error }}</p>
-              <button class="btn btn-primary rounded-5 px-5 btn-lg">SignUp</button>
+              <p v-if="isError" class="text-danger text-center fw-bold fs-6 mt-3">
+                {{ error }}</p>
+              <button class="btn btn-primary rounded-5 px-5 btn-lg">
+                <span v-if="isLoading" class="spinner-border text-white spinner-border-sm me-3" role="status"
+                  aria-hidden="true"></span>
+                SignUp
+              </button>
             </div>
           </form>
         </div>
@@ -45,9 +50,15 @@
 <script setup>
 import useSignUp from '@/composables/useSignUp';
 import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const { error, createAccount } = useSignUp()
+
 let isShow = ref(false)
+let isError = ref(false)
+const isLoading = ref(false)
+
 const form = reactive({
   username: null,
   email: null,
@@ -63,7 +74,6 @@ const showError = (field) => {
   return isTouched && isEmpty
 }
 
-
 const handleSignUp = async () => {
   touchedFields.value = {
     username: true,
@@ -72,7 +82,15 @@ const handleSignUp = async () => {
   }
 
   if (form.username && form.email && form.password) {
+    isLoading.value = true
     let res = await createAccount(form.username, form.email, form.password)
+    if (res) {
+      isError.value = false
+    }
+    else {
+      isError.value = true
+      isLoading.value = false
+    }
   }
 }
 
