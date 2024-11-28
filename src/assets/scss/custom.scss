@@ -65,8 +65,26 @@ input::placeholder {
 .eye-signup{
     position: absolute;
     cursor: pointer;
-    top: 70%;
+    top: 72%;
     right: 5px;
     color: #aaa;
     transform: translateX(-50%) translateY(-50%);
+}
+
+.move{
+    position: absolute;
+    cursor: pointer;
+    top: 40%;
+    right: 25px;
+    color: #aaa;
+    transform: translateX(-40%) translateY(-40%);
+}
+
+.move-signup{
+    position: absolute;
+    cursor: pointer;
+    top: 55%;
+    right: 20px;
+    color: #aaa;
+    transform: translateX(-55%) translateY(-55%);
 }

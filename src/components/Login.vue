@@ -7,25 +7,29 @@
             <img src="../assets/images/chatty.png" width="250" alt="" class="img-fluid">
           </div>
           <h2 class="fw-bold text-primary text-center mb-3">Log<span class="text-secondary">In</span></h2>
-          <form @submit.prevent="handleSubmit">
+          <form @submit.prevent="handleLogIn" novalidate>
             <div class="mb-3">
               <label for="email" class="form-label fw-bold">Email <span class="text-danger">*</span></label>
-              <input autocomplete="off" id="email" type="email" placeholder="name@chatty.com"
-                class="form-control form-control-lg">
+              <input v-model="form.email" autocomplete="off" id="email" type="email" placeholder="name@chatty.com"
+                :class="{ 'is-invalid': showError('email') }" class="form-control form-control-lg">
+              <div class="invalid-feedback">Email is required</div>
             </div>
             <div class="mb-3 position-relative">
               <label for="password" class="form-label fw-bold">Password <span class="text-danger">*</span></label>
-              <input autocomplete="off" :type="isShow ? 'text' : 'password'" id="password" placeholder="chatty2024"
+              <input v-model="form.password" autocomplete="off" :type="isShow ? 'text' : 'password'" id="password"
+                :class="{ 'is-invalid': showError('password') }" placeholder="chatty2024"
                 class="form-control form-control-lg">
-              <span @click="isShow = !isShow" class="material-symbols-outlined eye">
+              <span :class="{ 'move': showError('password') }" @click="isShow = !isShow"
+                class="material-symbols-outlined eye">
                 {{ isShow ? 'visibility' : 'visibility_off' }}
               </span>
+              <div class="invalid-feedback">Password is required</div>
               <div class="d-flex justify-content-end mt-2">
                 <span class="text-decoration-underline forgot">Forgot Password?</span>
               </div>
             </div>
             <div class="text-center">
-              <button class="btn btn-primary rounded-5 px-5 btn-lg">LogIn</button>
+              <button type="submit" class="btn btn-primary rounded-5 px-5 btn-lg">LogIn</button>
             </div>
           </form>
         </div>
@@ -35,10 +39,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
+import { reactive, ref } from 'vue';
 
 let isShow = ref(false)
+const form = reactive({
+  email: null,
+  password: null
+})
+const touchedFields = ref({})
+
+const showError = (field) => {
+  const isTouched = touchedFields.value[field];
+  const isEmpty = !form[field];
+
+  return isTouched && isEmpty;
+}
+
+const handleLogIn = () => {
+  touchedFields.value = {
+    email: true,
+    password: true
+  }
+}
+
 </script>
 
 <style></style>
