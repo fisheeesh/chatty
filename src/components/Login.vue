@@ -29,8 +29,11 @@
               </div>
             </div>
             <div class="text-center">
-              <p v-if="isError" class="text-danger text-center fw-bold fs-6 mt-3">{{ error }}</p>
-              <button type="submit" class="btn btn-primary rounded-5 px-5 btn-lg">
+              <p v-if="lockout" class="text-danger text-center fw-bold fs-6 mt-3">{{
+                lockoutMessage }}</p>
+              <p v-if="isError && !lockout" class="text-danger text-center fw-bold fs-6 mt-3">
+                {{ errorMessage }}</p>
+              <button type="submit" class="btn btn-primary rounded-5 px-5 btn-lg" :disabled="isLoading || lockout">
                 <span v-if="isLoading" class="spinner-border text-white spinner-border-sm me-3" role="status"
                   aria-hidden="true"></span>
                 LogIn
@@ -45,7 +48,7 @@
 
 <script setup>
 import useLogIn from '@/composables/useLogIn';
-import { reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 
 const { error, logIn } = useLogIn()
 
@@ -74,6 +77,82 @@ const showError = (field) => {
   return isTouched && isEmpty
 }
 
+const attemptCount = ref(0)
+const errorMessage = ref(null)
+const lockout = ref(false)
+const lockoutTime = ref(0)
+const lockoutTimer = ref(null)
+/**
+ * $ lock out level 1 for 1 min, 2 for 3 min, 3 for 15 min
+ */
+const lockoutLevel = ref(0)
+
+/**
+ * $ lockout time for failed levels (in seconds)
+ */
+const lockoutDurations = [0, 60, 180, 900]
+
+/**
+ * @TODO : Add a lock out feature
+ */
+
+const lockoutMessage = computed(() => {
+  return lockoutTime.value > 60
+    ? `Too many requests. Please wait ${Math.ceil(lockoutTime.value / 60)} minutes before trying again.`
+    : `Too many requests. Please wait ${lockoutTime.value} seconds before trying again.`
+})
+
+const startLockout = () => {
+  lockoutLevel.value = Math.min(lockoutLevel.value + 1, 3); // Max level is 3 (15 minutes)
+  lockoutTime.value = lockoutDurations[lockoutLevel.value];
+  lockout.value = true;
+
+  lockoutTimer.value = setInterval(() => {
+    lockoutTime.value--;
+    if (lockoutTime.value <= 0) {
+      clearInterval(lockoutTimer.value);
+      lockout.value = false;
+      saveLockoutData(); // Update storage to mark end of lockout
+    } else {
+      saveLockoutData(); // Save updated lockout data to localStorage
+    }
+  }, 1000);
+};
+
+const saveLockoutData = () => {
+  localStorage.setItem("lockoutData", JSON.stringify({
+    attemptCount: attemptCount.value,
+    lockoutLevel: lockoutLevel.value,
+    lockoutTime: lockoutTime.value,
+    lockoutStartTime: Date.now()
+  }));
+};
+
+const loadLockoutData = () => {
+  const lockoutData = JSON.parse(localStorage.getItem("lockoutData"));
+  if (lockoutData) {
+    const elapsed = Math.floor((Date.now() - lockoutData.lockoutStartTime) / 1000);
+    const remainingLockoutTime = lockoutData.lockoutTime - elapsed;
+
+    attemptCount.value = lockoutData.attemptCount;
+    lockoutLevel.value = lockoutData.lockoutLevel;
+
+    if (remainingLockoutTime > 0) {
+      lockoutTime.value = remainingLockoutTime;
+      lockout.value = true;
+      lockoutTimer.value = setInterval(() => {
+        lockoutTime.value--;
+        if (lockoutTime.value <= 0) {
+          clearInterval(lockoutTimer.value);
+          lockout.value = false;
+          saveLockoutData(); // Clear lockout data when timer ends
+        }
+      }, 1000);
+    }
+  }
+};
+
+
 const handleLogIn = async () => {
   /**
    * ? As soon as user clicked the login button, set as the input fields are touched 
@@ -83,20 +162,40 @@ const handleLogIn = async () => {
     email: true,
     password: true
   }
+  isError.value = false;
+  error.value = null;
 
   if (form.email && form.password) {
+
     isLoading.value = true
+    if (lockout.value) return;
+
     let res = await logIn(form.email, form.password)
     if (res) {
-      isError.value = false
+      isError.value = false;
+      attemptCount.value = 0;
+      lockoutLevel.value = 0;
+      localStorage.removeItem("lockoutData");
       isLoading.value = false
     }
     else {
-      isError.value = true
+      isError.value = true;
+      attemptCount.value++;
+
+      if ((lockoutLevel.value === 0 && attemptCount.value >= 3) ||
+        (lockoutLevel.value === 1 && attemptCount.value >= 5) ||
+        (lockoutLevel.value >= 2)) {
+        errorMessage.value = "Too many requests. Please try again later.";
+        startLockout();
+      } else {
+        errorMessage.value = error.value;
+      }
       isLoading.value = false
     }
   }
 }
+
+onMounted(loadLockoutData);
 
 </script>
 

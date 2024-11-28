@@ -80,6 +80,7 @@ const handleSignUp = async () => {
     email: true,
     password: true
   }
+  isError.value = false
 
   if (form.username && form.email && form.password) {
     isLoading.value = true
