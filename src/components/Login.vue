@@ -29,7 +29,12 @@
               </div>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-primary rounded-5 px-5 btn-lg">LogIn</button>
+              <p v-if="isError" class="text-danger text-center fw-bold fs-6 mt-3">{{ error }}</p>
+              <button type="submit" class="btn btn-primary rounded-5 px-5 btn-lg">
+                <span v-if="isLoading" class="spinner-border text-white spinner-border-sm me-3" role="status"
+                  aria-hidden="true"></span>
+                LogIn
+              </button>
             </div>
           </form>
         </div>
@@ -39,9 +44,15 @@
 </template>
 
 <script setup>
+import useLogIn from '@/composables/useLogIn';
 import { reactive, ref } from 'vue';
 
+const { error, logIn } = useLogIn()
+
 let isShow = ref(false)
+const isError = ref(false)
+const isLoading = ref(false)
+
 const form = reactive({
   email: null,
   password: null
@@ -63,7 +74,7 @@ const showError = (field) => {
   return isTouched && isEmpty
 }
 
-const handleLogIn = () => {
+const handleLogIn = async () => {
   /**
    * ? As soon as user clicked the login button, set as the input fields are touched 
    * ? even if they are being touched or not (for UX and to make the showError function work)
@@ -71,6 +82,19 @@ const handleLogIn = () => {
   touchedFields.value = {
     email: true,
     password: true
+  }
+
+  if (form.email && form.password) {
+    isLoading.value = true
+    let res = await logIn(form.email, form.password)
+    if (res) {
+      isError.value = false
+      isLoading.value = false
+    }
+    else {
+      isError.value = true
+      isLoading.value = false
+    }
   }
 }
 

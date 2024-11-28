@@ -83,9 +83,10 @@ const handleSignUp = async () => {
 
   if (form.username && form.email && form.password) {
     isLoading.value = true
-    let res = await createAccount(form.username, form.email, form.password)
-    if (res) {
+    let response = await createAccount(form.username, form.email, form.password)
+    if (response) {
       isError.value = false
+      isLoading.value = false
     }
     else {
       isError.value = true
