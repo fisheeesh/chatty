@@ -19,7 +19,7 @@
               <input v-model="form.password" autocomplete="off" :type="isShow ? 'text' : 'password'" id="password"
                 :class="{ 'is-invalid': showError('password') }" placeholder="chatty2024"
                 class="form-control form-control-lg">
-              <span :class="{ 'move': showError('password') }" @click="isShow = !isShow"
+              <span :class="{ move: showError('password') }" @click="isShow = !isShow"
                 class="material-symbols-outlined eye">
                 {{ isShow ? 'visibility' : 'visibility_off' }}
               </span>
@@ -48,14 +48,26 @@ const form = reactive({
 })
 const touchedFields = ref({})
 
+/**
+ * ? I want to show error if the input field are empty.
+ * ? If I only check isEmpty (which is the input fields are empty or not), 
+ * ? it will be always true cus at the inital stage inputs are null.
+ * ? To overcome this, I only want to show error after user intreacted with the input fields.
+ * ? Even user intreacted with the input fields and still null, only in that case error should be shown.
+ * @param field 
+ */
 const showError = (field) => {
-  const isTouched = touchedFields.value[field];
-  const isEmpty = !form[field];
+  const isTouched = touchedFields.value[field]
+  const isEmpty = !form[field]
 
-  return isTouched && isEmpty;
+  return isTouched && isEmpty
 }
 
 const handleLogIn = () => {
+  /**
+   * ? As soon as user clicked the login button, set as the input fields are touched 
+   * ? even if they are being touched or not (for UX and to make the showError function work)
+   */
   touchedFields.value = {
     email: true,
     password: true
