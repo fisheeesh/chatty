@@ -32,6 +32,7 @@
               <div class="invalid-feedback">Password is required</div>
             </div>
             <div class="text-center">
+              <p class="fs-6 text-danger">{{ error }}</p>
               <button class="btn btn-primary rounded-5 px-5 btn-lg">SignUp</button>
             </div>
           </form>
@@ -42,8 +43,10 @@
 </template>
 
 <script setup>
+import useSignUp from '@/composables/useSignUp';
 import { reactive, ref } from 'vue';
 
+const { error, createAccount } = useSignUp()
 let isShow = ref(false)
 const form = reactive({
   username: null,
@@ -60,11 +63,16 @@ const showError = (field) => {
   return isTouched && isEmpty
 }
 
-const handleSignUp = () => {
+
+const handleSignUp = async () => {
   touchedFields.value = {
     username: true,
     email: true,
     password: true
+  }
+
+  if (form.username && form.email && form.password) {
+    let res = await createAccount(form.username, form.email, form.password)
   }
 }
 
