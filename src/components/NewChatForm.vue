@@ -1,12 +1,36 @@
 <template>
     <div class="position-relative">
-        <textarea placeholder="Type a message and hit 'Enter' to send"
+        <textarea v-model="message" @keydown.enter.prevent="sendMessage"
+            placeholder="Type a message and hit 'Enter' to send"
             class="form-control rounded-bottom-5 bg-white border-0 pt-3 pb-3 px-4"></textarea>
-        <i class="far fa-paper-plane position-absolute send"></i>
+        <span @click="sendMessage">
+            <i class="far fa-paper-plane position-absolute send"></i>
+        </span>
     </div>
 </template>
 
 <script setup>
+import getUser from '@/composables/getUser';
+import useCollection from '@/composables/useCollection';
+import { timeStamp } from '@/firebase/config';
+import { ref } from 'vue';
+
+const { user } = getUser()
+const { error, addDoc } = useCollection('messages')
+
+const message = ref('')
+const sendMessage = async () => {
+    if (!message.value) return
+
+    let newMessage = {
+        sender: user.value.displayName,
+        message: message.value,
+        created_at: timeStamp()
+    }
+    
+    await addDoc(newMessage)
+    message.value = ''
+}
 </script>
 
 <style></style>
