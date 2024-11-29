@@ -1,3 +1,7 @@
+// body{
+//     background-color: var(--bs-secondary);
+// }
+
 input::placeholder {
     font-family: 'Nunito', sans-serif;
     font-size: 16px;
@@ -91,4 +95,22 @@ input{
     right: 20px;
     color: #aaa;
     transform: translateX(-55%) translateY(-55%);
+}
+
+.send{
+    cursor: pointer;
+    top: 45%;
+    right: 25px;
+    color: var(--bs-primary);
+    font-size: 22px;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.chat-window{
+    height: 400px;
+    background-color: #ededee !important;
+}
+
+textarea{
+    resize: none;
 }
