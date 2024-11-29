@@ -6,13 +6,9 @@
           <!-- Navbar -->
           <NavBar />
           <!-- ChatWindow -->
-          <div class="p-4 chat-window">
-          </div>
+          <ChatWindow />
           <!-- ChatForm -->
-          <div class="position-relative">
-            <textarea placeholder="Type a message and hit 'Enter' to send" class="form-control rounded-bottom-5 bg-white border-0 pt-3 pb-3 px-4"></textarea>
-            <i class="far fa-paper-plane position-absolute send"></i>
-          </div>
+          <NewChatForm />
         </div>
       </div>
     </div>
@@ -20,7 +16,9 @@
 </template>
 
 <script setup>
+import ChatWindow from '@/components/ChatWindow.vue';
 import NavBar from '@/components/NavBar.vue';
+import NewChatForm from '@/components/NewChatForm.vue';
 import getUser from '@/composables/getUser';
 import { watch } from 'vue';
 import { useRouter } from 'vue-router';

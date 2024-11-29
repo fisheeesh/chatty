@@ -8,7 +8,7 @@ input::placeholder {
     color: #aaa !important;
 }
 
-input{
+input {
     font-size: 16px !important;
 }
 
@@ -61,7 +61,7 @@ input{
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.eye{
+.eye {
     position: absolute;
     cursor: pointer;
     top: 50%;
@@ -70,7 +70,7 @@ input{
     transform: translateX(-50%) translateY(-50%);
 }
 
-.eye-signup{
+.eye-signup {
     position: absolute;
     cursor: pointer;
     top: 72%;
@@ -79,7 +79,7 @@ input{
     transform: translateX(-50%) translateY(-50%);
 }
 
-.move{
+.move {
     position: absolute;
     cursor: pointer;
     top: 40%;
@@ -88,7 +88,7 @@ input{
     transform: translateX(-40%) translateY(-40%);
 }
 
-.move-signup{
+.move-signup {
     position: absolute;
     cursor: pointer;
     top: 55%;
@@ -97,20 +97,33 @@ input{
     transform: translateX(-55%) translateY(-55%);
 }
 
-.send{
+.send {
     cursor: pointer;
     top: 45%;
     right: 25px;
-    color: var(--bs-primary);
+    color: #aaa;
     font-size: 22px;
     transform: translateX(-50%) translateY(-50%);
+    transition: all 0.3s ease-in-out;
 }
 
-.chat-window{
-    height: 400px;
+.send:hover {
+    color: var(--bs-primary);
+}
+
+.chat-window {
     background-color: #ededee !important;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-textarea{
+.message {
+    display: inline-block;
+    max-width: fit-content;
+}
+
+textarea {
     resize: none;
 }
