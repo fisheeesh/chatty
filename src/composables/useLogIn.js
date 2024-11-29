@@ -7,7 +7,7 @@ const logIn = async (email, password) => {
     try {
         let response = await auth.signInWithEmailAndPassword(email, password)
         if (!response) throw new Error("Something went wrong!. Please try again.")
-        console.log('User Logged In Successfully', res.user)
+        console.log('User Logged In Successfully', response.user)
 
         return response
     }

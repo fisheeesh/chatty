@@ -54,6 +54,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter()
 const { error, createAccount } = useSignUp()
+const emit = defineEmits(['signup'])
 
 let isShow = ref(false)
 let isError = ref(false)
@@ -88,6 +89,7 @@ const handleSignUp = async () => {
     if (response) {
       isError.value = false
       isLoading.value = false
+      emit('signup')
     }
     else {
       isError.value = true

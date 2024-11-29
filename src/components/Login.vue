@@ -51,6 +51,7 @@ import useLogIn from '@/composables/useLogIn';
 import { computed, onMounted, reactive, ref } from 'vue';
 
 const { error, logIn } = useLogIn()
+const emit = defineEmits(['login'])
 
 let isShow = ref(false)
 const isError = ref(false)
@@ -177,6 +178,7 @@ const handleLogIn = async () => {
       lockoutLevel.value = 0;
       localStorage.removeItem("lockoutData");
       isLoading.value = false
+      emit('login')
     }
     else {
       isError.value = true;

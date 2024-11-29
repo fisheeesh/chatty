@@ -1,6 +1,6 @@
 <template>
   <div v-if="isLogin">
-    <Login />
+    <Login @login="enterChatroom" />
     <div class="d-flex justify-content-center align-items-center text-center my-3">
       Not a member yet? <span @click="isLogin = !isLogin" class="signUp ms-2 text-secondary">Create an account.</span>
     </div>
@@ -19,7 +19,7 @@
     </div>
   </div>
   <div v-else>
-    <SignUp />
+    <SignUp @signup="enterChatroom" />
     <div class="d-flex justify-content-center align-items-center text-center my-3">
       Already have an account? <span @click="isLogin = !isLogin" class="signUp ms-2 text-secondary">LogIn.</span>
     </div>
@@ -29,9 +29,15 @@
 <script setup>
 import Login from '@/components/Login.vue';
 import SignUp from '@/components/SignUp.vue';
+import router from '@/router';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 let isLogin = ref(true);
+
+const enterChatroom = () => {
+  router.push('/chatroom')
+}
 </script>
 
 <style>
