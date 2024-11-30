@@ -29,17 +29,16 @@
 <script setup>
 import Login from '@/components/Login.vue';
 import SignUp from '@/components/SignUp.vue';
-import router from '@/router';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 let isLogin = ref(true);
 
+const router = useRouter()
+
 const enterChatroom = () => {
-  router.push('/chatroom')
+  router.push({ name: 'chatroom' })
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -15,10 +15,10 @@ import useCollection from '@/composables/useCollection';
 import { timeStamp } from '@/firebase/config';
 import { ref } from 'vue';
 
+const message = ref('')
 const { user } = getUser()
 const { error, addDoc } = useCollection('messages')
 
-const message = ref('')
 const sendMessage = async () => {
     if (!message.value) return
 
@@ -27,10 +27,10 @@ const sendMessage = async () => {
         message: message.value,
         created_at: timeStamp()
     }
-    
-    await addDoc(newMessage)
     message.value = ''
+    await addDoc(newMessage)
 }
+
 </script>
 
 <style></style>

@@ -23,11 +23,14 @@ import getUser from '@/composables/getUser';
 import { watch } from 'vue';
 import { useRouter } from 'vue-router';
 
-const router = useRouter()
-const { user } = getUser()
-
+let router = useRouter()
+let { user } = getUser()
+/**
+ * ? As soon as user logout, we want to redirect to welcome as for the user experienec
+ * ? not let user to stay or show the chatroom page all the time, so we handled it by watcing user states
+ */
 watch(user, () => {
-  if (!user.value) router.push('/')
+  !user.value && router.push({ name: 'welcome' })
 })
 </script>
 

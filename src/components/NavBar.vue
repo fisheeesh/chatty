@@ -3,9 +3,9 @@
         class="navbar p-4 rounded-top-5 border-0 border-bottom bg-white d-flex justify-content-between align-items-center">
         <!-- User Info -->
         <div class="d-flex gap-3">
-            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="" width="50" class="img-fluid rounded-circle">
+            <img src="../assets/images/default.png" alt="" width="50" class="img-fluid rounded-circle">
             <div class="d-flex flex-column">
-                <span>Hi there, {{ user.displayName }}!</span>
+                <span>Hi there, {{ user.displayName ? user.displayName : defaultName }}!</span>
                 <span class="fw-bold">Logged in as {{ user.email }}</span>
             </div>
         </div>
@@ -43,6 +43,8 @@ import useSignOUt from '@/composables/useSignOut';
 
 const { user } = getUser()
 const { error, logOut } = useSignOUt()
+
+const defaultName = 'chattie'
 
 const signOut = async () => {
     await logOut()
