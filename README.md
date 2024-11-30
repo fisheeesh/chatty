@@ -24,9 +24,9 @@ Welcome to the Live Chat Application! This app allows users to engage in real-ti
 
 ### Prerequisites
 
-- Node.js
-- npm
 - Vue.js
+- Bootstrap
+- date-fns
 - A Firebase project with Firestore and Authentication enabled
 
 ### Play it around here - https://chatty-1090b.web.app/
