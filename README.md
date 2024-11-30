@@ -1,4 +1,4 @@
-# Live Chat Application
+# Chatty (Live Chat Application)
 
 Welcome to the Live Chat Application! This app allows users to engage in real-time group chats after creating an account using Firebase Authentication. Below is a detailed overview of the application's features and functionalities.
 
@@ -27,7 +27,7 @@ Welcome to the Live Chat Application! This app allows users to engage in real-ti
 - Vue.js
 - A Firebase project with Firestore and Authentication enabled
 
-### Play it around here - https://vue-blog-system-571db.web.app
+### Play it around here - https://chatty-1090b.web.app/
 
 ## Project setup
 ```
