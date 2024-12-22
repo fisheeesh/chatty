@@ -3,8 +3,8 @@
         class="navbar p-4 rounded-top-5 border-0 border-bottom bg-white d-flex justify-content-between align-items-center">
         <!-- User Info -->
         <div class="d-flex gap-3">
-            <img :src="user?.photoURL || require('@/assets/images/default.png')" alt="" width=" 50"
-                class="img-fluid rounded-circle">
+            <img :src="user?.photoURL || require('@/assets/images/default.png')" alt="" width="50"
+                class="img-fluid rounded-circle profile">
             <div class="d-flex flex-column">
                 <span>Hi there, {{ user.displayName ? user.displayName : defaultName }}!</span>
                 <span class="fw-bold">Logged in as {{ user.email }}</span>
@@ -13,7 +13,7 @@
         <!-- Logout button -->
         <div>
             <button type="button" data-bs-toggle="modal" data-bs-target="#logOutModal"
-                class="btn btn-primary rounded-5 px-3 py-2">Logout</button>
+                class="btn btn-primary rounded-5 px-3 py-2 log-out">Logout</button>
         </div>
     </section>
     <!-- modal -->

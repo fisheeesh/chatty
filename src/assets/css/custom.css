@@ -109,7 +109,7 @@ input {
 
 .chat-window {
   background-color: #ededee !important;
-  height: 400px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -133,5 +133,17 @@ textarea {
 @media (max-width: 990px) {
   .small-screen {
     padding: 11px 23px !important;
+  }
+}
+@media (max-width: 760px) {
+  .log-out {
+    margin-top: 10px !important;
+  }
+}
+@media (max-width: 460px) {
+  .profile {
+    width: 45px !important;
+    height: 45px !important;
+    margin-top: 10px !important;
   }
 }

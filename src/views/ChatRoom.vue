@@ -1,5 +1,5 @@
 <template>
-  <section class="chatroom my-5">
+  <section class="chatroom mt-5">
     <div class="container">
       <div class="row">
         <div class="col-md-10 offset-md-1 d-flex flex-column shadow-sm rounded-5 p-0">

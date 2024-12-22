@@ -1,16 +1,30 @@
 <template>
     <div class="p-4 chat-window overflow-scroll" ref="msgBox">
         <div v-if="formattedMessages.length > 0">
-            <div v-for="message in formattedMessages" :key="message.id" class="d-flex gap-3 mb-3">
-                <div class="image-container d-flex justify-content-center align-items-center">
-                    <img :src="message.photoURL || require('@/assets/images/default.png')" width="45" alt=""
-                        class="img-fluid rounded-circle">
-                </div>
-                <div class="d-flex flex-column">
-                    <span class="fw-bold ms-1">{{ message.sender }}</span>
-                    <span :class="{ 'small-screen': message.message.length > 20 }"
-                        class="bg-primary rounded-5 py-2 px-3 message text-white">{{ message.message }}</span>
-                    <span style="font-size: 11px;" class="text-muted ms-1 mt-1">{{ message.created_at }} ago</span>
+            <div v-for="message in formattedMessages" :key="message.id">
+                <!-- Check if the message sender is the current user -->
+                <div
+                    :class="{ 'd-flex justify-content-end': message.sender === user?.displayName, 'd-flex gap-3 mb-3': message.sender !== user?.displayName }">
+                    <!-- If not current user, show photo and name -->
+                    <template v-if="message.sender !== user?.displayName">
+                        <div class="image-container d-flex justify-content-center align-items-center">
+                            <img :src="message.photoURL || require('@/assets/images/default.png')" width="45" alt=""
+                                class="img-fluid rounded-circle">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <span class="fw-bold ms-1">{{ message.sender }}</span>
+                            <span :class="{ 'small-screen': message.message.length > 20 }"
+                                class="bg-primary rounded-5 py-2 px-3 message text-white">{{ message.message }}</span>
+                            <span style="font-size: 11px;" class="text-muted ms-1 mt-1">{{ message.created_at }}
+                                ago</span>
+                        </div>
+                    </template>
+                    <!-- If current user, align message to the right -->
+                    <template v-else>
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="bg-secondary rounded-5 py-2 px-3 mb-2 message text-white">{{ message.message }}</span>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -37,6 +51,16 @@ import { formatDistanceToNow } from 'date-fns';
 import { computed, onUpdated, ref, watchEffect } from 'vue';
 
 const { user } = getUser()
+
+const isShow = ref(false)
+
+const toggle = () => {
+    isShow.value = !isShow.value
+}
+
+const toggleShow = computed(() => {
+    return 
+})
 
 let messages = ref([]);
 const msgBox = ref(null)
@@ -74,4 +98,5 @@ const formattedMessages = computed(() => {
 
 </script>
 
-<style></style>
+<style scoped>
+</style>
