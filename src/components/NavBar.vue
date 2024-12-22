@@ -3,7 +3,8 @@
         class="navbar p-4 rounded-top-5 border-0 border-bottom bg-white d-flex justify-content-between align-items-center">
         <!-- User Info -->
         <div class="d-flex gap-3">
-            <img src="../assets/images/default.png" alt="" width="50" class="img-fluid rounded-circle">
+            <img :src="user?.photoURL || require('@/assets/images/default.png')" alt="" width=" 50"
+                class="img-fluid rounded-circle">
             <div class="d-flex flex-column">
                 <span>Hi there, {{ user.displayName ? user.displayName : defaultName }}!</span>
                 <span class="fw-bold">Logged in as {{ user.email }}</span>
@@ -17,7 +18,7 @@
     </section>
     <!-- modal -->
     <div class="modal fade" id="logOutModal">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-primary fw-bold fs-3" id="exampleModalLabel">Ready to Leave?</h5>

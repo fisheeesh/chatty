@@ -10,7 +10,7 @@
       <div class="line"></div>
     </div>
     <div class="my-3 d-inline-block d-flex justify-content-center align-items-center">
-      <div class="card shadow-sm border-0 google">
+      <div class="card shadow-sm border-0 google" @click="signInWithGoogle">
         <div class="card-body px-3">
           <img src="../assets//images/google.png" width="30" alt="" class="img-fluid">
           <span class="ms-3 fw-bold">Continue with Google</span>
@@ -31,14 +31,31 @@ import Login from '@/components/Login.vue';
 import SignUp from '@/components/SignUp.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import firebase from "firebase/app";
 
 let isLogin = ref(true);
 
-const router = useRouter()
+const router = useRouter();
 
 const enterChatroom = () => {
-  router.push({ name: 'chatroom' })
-}
+  router.push({ name: 'chatroom' });
+};
+
+const signInWithGoogle = async () => {
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const result = await firebase.auth().signInWithPopup(provider);
+
+    // Optional: Retrieve user info if needed
+    const user = result.user;
+    console.log('User logged in with Google:', user);
+
+    // Navigate to the chatroom
+    enterChatroom();
+  } catch (error) {
+    console.error('Error signing in with Google:', error.message);
+  }
+};
 </script>
 
 <style></style>

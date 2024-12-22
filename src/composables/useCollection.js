@@ -9,7 +9,7 @@ const useCollection = (collection) => {
         try{
             let res = await db.collection(collection).add(doc)
             if(!res) throw new Error ('Something went wrong!. Please try again.')
-            console.log('Document Added Successfully', res)
+            // console.log('Document Added Successfully', res)
         }
         catch(err){
             error.value = err.message

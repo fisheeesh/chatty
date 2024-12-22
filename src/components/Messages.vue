@@ -3,12 +3,13 @@
         <div v-if="formattedMessages.length > 0">
             <div v-for="message in formattedMessages" :key="message.id" class="d-flex gap-3 mb-3">
                 <div class="image-container d-flex justify-content-center align-items-center">
-                    <img :src="user?.photoURL || require('@/assets/images/default.png')" alt=""
-                        class="img-fluid rounded-circle" width="50" v-if="user">
+                    <img :src="message.photoURL || require('@/assets/images/default.png')" width="45" alt=""
+                        class="img-fluid rounded-circle">
                 </div>
                 <div class="d-flex flex-column">
                     <span class="fw-bold ms-1">{{ message.sender }}</span>
-                    <span class="bg-primary rounded-5 py-2 px-3 message text-white">{{ message.message }}</span>
+                    <span :class="{ 'small-screen': message.message.length > 20 }"
+                        class="bg-primary rounded-5 py-2 px-3 message text-white">{{ message.message }}</span>
                     <span style="font-size: 11px;" class="text-muted ms-1 mt-1">{{ message.created_at }} ago</span>
                 </div>
             </div>
@@ -33,7 +34,7 @@
 import getUser from '@/composables/getUser';
 import { db } from '@/firebase/config';
 import { formatDistanceToNow } from 'date-fns';
-import { computed, onUpdated, ref } from 'vue';
+import { computed, onUpdated, ref, watchEffect } from 'vue';
 
 const { user } = getUser()
 
@@ -46,7 +47,8 @@ onUpdated(() => {
     msgBox.value.scrollTop = msgBox.value.scrollHeight
 })
 
-db.collection('messages').orderBy('created_at').onSnapshot(snap => {
+const unsub = db.collection('messages').orderBy('created_at').onSnapshot(snap => {
+    console.log('snap')
     let result = [];
     // console.log(snap)
     // console.log(snap.docs)
@@ -57,6 +59,10 @@ db.collection('messages').orderBy('created_at').onSnapshot(snap => {
         doc.data().created_at && result.push(document)
     })
     messages.value = result
+})
+
+watchEffect((onInvalidate) => {
+    onInvalidate(() => unsub())
 })
 
 const formattedMessages = computed(() => {

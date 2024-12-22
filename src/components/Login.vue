@@ -24,9 +24,9 @@
                 {{ isShow ? 'visibility' : 'visibility_off' }}
               </span>
               <div class="invalid-feedback">Password is required</div>
-              <div class="d-flex justify-content-end mt-2">
+              <!-- <div class="d-flex justify-content-end mt-2">
                 <span class="text-decoration-underline forgot">Forgot Password?</span>
-              </div>
+              </div> -->
             </div>
             <div class="text-center">
               <p v-if="lockout" class="text-danger text-center fw-bold fs-6 mt-3">{{
