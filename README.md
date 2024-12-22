@@ -2,6 +2,8 @@
 
 Welcome to the Live Chat Application! This app allows users to engage in real-time group chats after creating an account using Firebase Authentication. Below is a detailed overview of the application's features and functionalities.
 
+![User Interface](src/assets/images/screen.png) 
+
 ## Features
 
 - **User Authentication:** 
@@ -22,9 +24,9 @@ Welcome to the Live Chat Application! This app allows users to engage in real-ti
 
 ### Prerequisites
 
-- Node.js
-- npm
 - Vue.js
+- Bootstrap
+- date-fns
 - A Firebase project with Firestore and Authentication enabled
 
 ### Play it around here - https://chatty-1090b.web.app/
