@@ -4,6 +4,18 @@ Welcome to Chatty! This app allows users to engage in real-time group chats afte
 
 ![User Interface](src/assets/images/screen.png) 
 
+## Table of Contents
+- [Features](#features)
+  - [User Authentication](#user-authentication)
+  - [Route Guards](#route-guards)
+  - [Real-Time Group Chat](#real-time-group-chat)
+  - [Messenger-Like Interface](#messenger-like-interface)
+  - [Persistent Session](#persistent-session)
+- [Prerequisites](#prerequisites)
+- [Live Demo](#live-demo)
+- [Project Setup](#project-setup)
+- [License](#license)
+
 ## Features
 
 - **User Authentication:** 
